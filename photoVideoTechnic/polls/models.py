@@ -6,6 +6,10 @@ from django.db import models
 class MaxResolution(models.Model):
     resolution = models.CharField(max_length=15)
 
+    class Meta:
+        verbose_name = "Максимальное разрешение"
+        verbose_name_plural = "Максимальные разрешения"
+
     def __str__(self):
         return self.resolution
 
@@ -13,17 +17,25 @@ class MaxResolution(models.Model):
 class Type(models.Model):
     name = models.CharField(max_length=30)
 
+    class Meta:
+        verbose_name = "Тип фотоаппарата"
+        verbose_name_plural = "Типы фотоаппаратов"
+
     def __str__(self):
         return self.name
 
 
 class Cameras(models.Model):
-    manufacturer = models.CharField(max_length=30)
-    model = models.CharField(max_length=100)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=30, verbose_name="Производитель")
+    model = models.CharField(max_length=100, verbose_name="Модель")
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name="Тип фотоаппарата")
     price = models.IntegerField(default=0)
 
-    @admin.display(description='Price')
+    class Meta:
+        verbose_name = "Фотоаппарат"
+        verbose_name_plural = "Фотоаппараты"
+
+    @admin.display(description='Цена')
     def formatPrice(self):
         return str(self.price) + " ₽"
 
@@ -32,12 +44,16 @@ class Cameras(models.Model):
 
 
 class VideoCameras(models.Model):
-    manufacturer = models.CharField(max_length=30)
-    model = models.CharField(max_length=100)
-    maxResolution = models.ForeignKey(MaxResolution, on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=30, verbose_name="Производитель")
+    model = models.CharField(max_length=100, verbose_name="Модель")
+    maxResolution = models.ForeignKey(MaxResolution, on_delete=models.CASCADE, verbose_name="Максимальное разрешение")
     price = models.IntegerField(default=0)
 
-    @admin.display(description='Price')
+    class Meta:
+        verbose_name = "Видеокамера"
+        verbose_name_plural = "Видеокамеры"
+
+    @admin.display(description='Цена')
     def formatPrice(self):
         return str(self.price) + " ₽"
 
@@ -47,12 +63,16 @@ class VideoCameras(models.Model):
 
 
 class ActionCameras(models.Model):
-    manufacturer = models.CharField(max_length=30)
-    model = models.CharField(max_length=100)
-    maxResolution = models.ForeignKey(MaxResolution, on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=30, verbose_name="Производитель")
+    model = models.CharField(max_length=100, verbose_name="Модель")
+    maxResolution = models.ForeignKey(MaxResolution, on_delete=models.CASCADE, verbose_name="Максимальное разрешение")
     price = models.IntegerField(default=0)
 
-    @admin.display(description='Price')
+    class Meta:
+        verbose_name = "Экшн-камера"
+        verbose_name_plural = "Экшн-камеры"
+
+    @admin.display(description='Цена')
     def formatPrice(self):
         return str(self.price) + " ₽"
 
@@ -86,3 +106,4 @@ class Selections(admin.SimpleListFilter):
             return queryset.filter(Cameras__type='Film camera')
         if self.value() == 'Camera with interchangeable optics':
             return queryset.filter(Cameras__type='Camera with interchangeable optics')
+
