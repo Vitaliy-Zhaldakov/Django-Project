@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1 align="center">Фото-видео техника</h1>
+    <table cellspacing = '20'>
+        <caption><h2>Фотоаппараты</h2></caption>
+            <tr>
+                <th>Производитель</th>
+                <th>Модель</th>
+                <th>Цена</th>
+            </tr>
+    <div class="features">
+        {% if homeTable %}
+        {% for entry in homeTable %}
+        <div class="alert alert-warning">
+            <tr><td align = 'center'>{{ entry.manufacturer }}</td>
+        <td align = 'center'>{{ entry.model }}</td>
+        <td align = 'center'>{{ entry.price }} ₽ </td>
+        <td><a href="{% url 'detail' entry.id %}" class="btn btn-warning">Выбрать</a></td>
+            </tr>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>У вас нет записей </p>
+        {% endif %}
+    </div>
+    </table>
+<h2><a href="{% url 'create' %}" class="btn btn-warning">Добавить фотоаппарат</a></h2>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{camera.manufacturer}} {{ camera.model }}</title>
+</head>
+<body>
+<div class="features">
+        <h2>Идентификатор: {{ camera.id }}</h2>
+        <h2>Производитель: {{ camera.manufacturer }}</h2>
+        <h2>Модель: {{ camera.model }}</h2>
+        <h2>Тип фотоаппарата: {{ camera.type }}</h2>
+        <h2>Цена: {{ camera.price }} ₽</h2>
+    <h3><a href="{% url 'homepage' %}" class="btn btn-warning">Вернуться на главную</a></h3>
+    </div>
+</body>
+</html>

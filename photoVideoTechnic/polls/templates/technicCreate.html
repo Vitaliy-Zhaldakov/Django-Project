@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить данные</title>
+</head>
+<body>
+     <div class="features">
+        <h2>Форма по добавлению фотоаппарата</h2>
+        <form method="post">
+            {% csrf_token %}
+            Производитель:
+            {{ form.manufacturer }}<br><br>
+            Модель:
+            {{ form.model }}<br><br>
+            Тип фотоаппарата:
+            {{ form.type }}<br><br>
+            Цена:
+            {{ form.price }}<br><br>
+            <span>{{ error }}</span>
+            <button class="btn btn-success" type="submit">Добавить фотоаппарат</button>
+        </form>
+        </div>
+</body>
+</html>
